@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>jump for joy</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style/my_style.css">
 </head>
 <body>
     <!--start of head-->
@@ -15,21 +15,28 @@
     <!-- end of head -->
     <!-- start of main -->
     <div id="main">
-        <div>
-            <ing></ing>
+        <div class="guess_box">
+            <img src="images/jump1.jpg"></img>
         </div>
-        <div>
-            <ing></ing>
+        <div class="guess_box">
+            <img src="images/jump2.jpg"></img>
         </div>
-        <div>
-            <ing></ing>
+        <div class="guess_box">
+            <img src="images/jump3.jpg"></img>
         </div>
-        <div>
-            <ing></ing>
+        <div class="guess_box">
+            <img src="images/jump4.jpg"></img>
         </div>
     </div>
     <!-- end of main -->
     <script src="script/jquery-3.2.1.min.js"></script>
-    <script></script>
+    <script>
+        $(document).ready(function(){
+            $("#main .guess_box").click(function(){
+                var discount=Math.floor((Math.random()*5)+5);
+                var discount-msg="折扣价为：<p>"+discount+"</p>"
+            })//end click function
+        })//end doc ready
+    </script>
 </body>
 </html>
