@@ -30,16 +30,6 @@
     </div>
     <!-- end of main -->
     <script src="script/jquery-3.2.1.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $("#main .guess_box").click(function(){
-
-                var discount=Math.floor((Math.random()*5)+5);
-                var discount_msg="<p>折扣为："+discount+"折！</p>"
-                $(".guess_box p").remove();
-                $(this).append(discount_msg);
-            })//end click function
-        })//end doc ready
-    </script>
+    <script src="script/my_scripts.js"></script>
 </body>
 </html>
