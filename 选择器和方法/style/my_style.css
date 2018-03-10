@@ -17,3 +17,12 @@ div{
     width: 170px;
     height: 245px;
 }
+.my_hover{
+     border: solid blue 3px;
+}
+.discount{
+    border: solid #0f0 3px;
+}
+.no_discount{
+    border:solid #f00 3px;
+}
