@@ -1,0 +1,11 @@
+.veg_leaf{
+    list-style-image: url("../images/leaf.png")
+}
+ul{
+    list-style: none;
+    margin-bottom: 20px;
+}
+.topper button{
+    float: left;
+    margin-right: 5px;
+}
