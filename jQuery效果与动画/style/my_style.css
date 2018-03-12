@@ -1,0 +1,63 @@
+body{
+    background-color:#000; 
+}
+p{
+    color: #33ff66;
+    font-family: "楷体";
+    font-size: 12px;
+
+}
+#top{
+    position: relative;
+    z-index: 4;
+}
+#container{
+    position: absolute;
+    left: 0xp;
+    top:0px;
+    z-index: 0;
+}
+.lightning{
+    display: none;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 0;
+}
+#frame{
+    position: absolute;
+    left:100px;
+    top: 100px;
+    width: 545px;
+    height: 629px;
+    background-image: url(../images/frame.png);
+    z-index: 2;
+    overflow: hidden;
+}
+#pic_box{
+    position: relative;
+    left: 91px;
+    top: 84px;
+    width: 367px;
+    height: 460px;
+    z-index: 1;
+    overflow: hidden;
+}
+.face{
+    position: relative;
+    left: 0px;
+    top: 0xp;
+    z-index: 0;
+}
+#head{
+    height: 172px;
+}
+#eyes{
+    height: 79px;
+}
+#nose{
+    height: 86px;
+}
+#mouth{
+    height: 117px;
+}
