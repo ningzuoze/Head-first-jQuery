@@ -9,6 +9,8 @@ p{
 }
 #top{
     position: relative;
+    top: 20px;
+    left: 100px;
     z-index: 4;
 }
 #container{
