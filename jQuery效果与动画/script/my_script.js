@@ -4,15 +4,45 @@ $(document).ready(function(){
         lightning_two(5000);
         lightning_three(7000);
 
-        function face(parts,partsclix){
-                $("#"+parts).click(function(){
-                        if(partsclix<9){
-                                partsclix+=1;
-                        }else{
-                                partsclix=0;
-                        }
-                })
-        }//end face function
+        $("#head").click(function(){
+                if(headclix<9){
+                        $(this).animate({left:"-=367px"},500);
+                        headclix+=1;
+                }else{
+                        $(this).animate({left:"0px"},500);
+                        headclix=0;
+                }
+        })
+        $("#eyes").click(function(){
+                if(eyeclix<9){
+                        $(this).animate({left:"-=367px"},500);
+                        eyeclix+=1;
+                }else{
+                        $(this).animate({left:"0px"},500);
+                        eyeclix=0;
+                }
+        })
+        
+        $("#nose").click(function(){
+                if(noseclix<9){
+                        $(this).animate({left:"-=367px"},500);
+                        noseclix+=1;
+                }else{
+                        $(this).animate({left:"0px"},500);
+                        noseclix=0;
+                }
+        })
+        
+        $("#mouth").click(function(){
+                if(mouthclix<9){
+                        $(this).animate({left:"-=367px"},500);
+                        mouthclix+=1;
+                }else{
+                        $(this).animate({left:"0px"},500);
+                        mouthclix=0;
+                }
+        })
+        
         
         function lightning_one(t){
                 $("#container #lightning1").fadeIn(250).fadeOut(250);
