@@ -12,5 +12,9 @@ h3{
     padding-right: 40px;
 }
 .current_hand{
-    
+    float: left;
+}
+#btnHit,#btnStick,#btnRestart{
+    display: none;
+    float: left;
 }
