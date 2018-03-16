@@ -92,7 +92,32 @@
 				return my_num;
 			}//产生随机数
 			
-			var used_cards=new Array();
+			var used_cards=new Array();//创建数组用来保存
+			
+			function deal(){
+				for (var i=0;i<2;i++) {
+					hit();
+				}
+			}//最初两张牌
+			
+			
+			function hit(){
+				var good_card=false;
+				do{
+					var index=getRandom(52);
+					if(!$.inArray(index,used_cards)>-1){
+						good_card=true;
+						used_card[used_cards.length]=index;
+						hand.cards[hand.cards.length]=c;
+						var $d=$("div");
+						$d.addClass("current hand").appendTo("#my_hand");
+						$("<img>").appendTo($d).attr('src','images/cards/'+c.suit+'/'+c.name+'.jpg').fadeOut('slow')
+					}
+				}white(!good_card);
+				good_card=false;
+			}
+			
+			
 			
 		})
 	</script>
