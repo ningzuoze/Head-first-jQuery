@@ -108,17 +108,17 @@ $(document).ready(function(){
             $("#hdrTotal").html("你的点数为："+this.current_total);//在Id为hdrTotal的元素上添加计算玩后的点数
             
             if(this.current_total>21){//大于21点
-                $("#btnStick").trigger("click");//跳转到
-                $("#imgResult").attr("src","images/x2.png");
-                $("#hdrResult").html("爆了!").addClass("lose");
+                $("#btnStick").trigger("click");//跳转到btnStick点击事件
+                $("#imgResult").attr("src","images/x2.png");//显示计算结果图片
+                $("#hdrResult").html("爆了!").addClass("lose");//显示结果在btnStick点击事件后更新事件内的文字
             }else if(this.current_total==21){//等于21点
-                $("#btnStick").trigger("click");
-                $("#imgResult").attr("src","images/check.png");
-                $("#hdrResult").html("21点!").addClass("win");
+                $("#btnStick").trigger("click");//跳转到btnStick点击事件
+                $("#imgResult").attr("src","images/check.png");//显示计算结果图片
+                $("#hdrResult").html("21点!").addClass("win");//显示结果在btnStick点击事件后更新事件内的文字
             }else if(this.current_total<=21&&this.cards.length==5){//发了五张牌后
-                $("#btnStick").trigger("click");
-                $("#imgResult").attr("src","images/check.png");
-                $("#hdrResult").html("你赢了（大于五张牌）!").addClass("win");
+                $("#btnStick").trigger("click");//跳转到btnStick点击事件
+                $("#imgResult").attr("src","images/check.png");//显示计算结果图片
+                $("#hdrResult").html("你赢了（大于五张牌）!").addClass("win");//显示结果在btnStick点击事件后更新事件内的文字
             }else{
                 //继续选择
             }
@@ -138,29 +138,29 @@ $(document).ready(function(){
     })//发牌按钮用来发牌
 
     function end(){
-        $("#btnHit").toggle();
-        $("#btnStick").toggle();
-        $("#btnRestart").toggle();
+        $("#btnHit").toggle();//发牌按钮隐藏
+        $("#btnStick").toggle();//提前解锁按钮隐藏
+        $("#btnRestart").toggle();//显示重开按钮
     }
 
     $("#btnStick").click(function(){
-        $("#hdrResult").html('赢了').attr("class","win");
-        $("#imgResult").attr('src','images/check.png');
-        $("#result").toggle();
-        end();
-    })//结束按钮
+        $("#hdrResult").html('赢了').attr("class","win");//提前结束赢
+        $("#imgResult").attr('src','images/check.png');//显示赢了的图片
+        $("#result").toggle();//结果图片的div
+        end();//所有的内容隐藏
+    })//提前结束按钮
 
     $("#btnRestart").click(function(){
-        $("#result").toggle();
-        $(this).toggle();
-        $("#my_hand").empty();
-        $("#hdrResult").html('');
-        $("#imgResult").attr('src','images/check.png');
+        $("#result").toggle();//隐藏结果图片div
+        $(this).toggle();//隐藏自身
+        $("#my_hand").empty();//删除发的牌
+        $("#hdrResult").html('');//记点重置
+        $("#imgResult").attr('src','images/check.png');//将imgResult的初始图片设为成功
 
         used_cards.length=0;
         hand.cards.length=0;
         hand.current_total=0;
-        $("#btnDeal").toggle().trigger('click');//
-    })//重置按钮
+        $("#btnDeal").toggle().trigger('click');//发牌按钮显示并点击
+    })//重开按钮
     
 })
