@@ -76,14 +76,14 @@ $(document).ready(function(){
     }//最初两张牌
     
     
-    function hit(){
+    function hit(){//随机发牌
         var good_card=false;//开关初始值为关
         do{
             var index=getRandom(52);//产生随机牌
             if(!$.inArray(index,used_cards)>-1){//判断产生的随机牌是不是在之前产生的牌中
                 good_card=true;//开关为开
                 var c=deck[index];//取一张牌储存在c中
-                used_cards[used_cards.length]=index;//在数组后面加元素，把产生的牌保存在数组中
+                used_cards[used_cards.length]=index;//在数组后面加元素，把产生的随机数保存在数组中
                 hand.cards[hand.cards.length]=c;//将牌的信息给hand对象用来输出
                 var $d=$("<div>");//创建一个div元素
                 $d.addClass("current_hand").appendTo("#my_hand");//添加类并加到id为my_hand后面
@@ -107,15 +107,18 @@ $(document).ready(function(){
             }
             $("#hdrTotal").html("你的点数为："+this.current_total);//在Id为hdrTotal的元素上添加计算玩后的点数
             
-            if(this.current_total>21){
+            if(this.current_total>21){//大于21点
+                $("#btnStick").trigger("click");//跳转到
+                $("#imgResult").attr("src","images/x2.png");
+                $("#hdrResult").html("爆了!").addClass("lose");
+            }else if(this.current_total==21){//等于21点
                 $("#btnStick").trigger("click");
-                $("#hdrResult").html("爆了!");
-            }else if(this.current_total==21){
+                $("#imgResult").attr("src","images/check.png");
+                $("#hdrResult").html("21点!").addClass("win");
+            }else if(this.current_total<=21&&this.cards.length==5){//发了五张牌后
                 $("#btnStick").trigger("click");
-                $("#hdrResult").html("21点!");
-            }else if(this.current_total<=21&&this.cards.length==5){
-                $("#btnStick").trigger("click");
-                $("#hdrResult").html("你赢了（大于五张牌）!");
+                $("#imgResult").attr("src","images/check.png");
+                $("#hdrResult").html("你赢了（大于五张牌）!").addClass("win");
             }else{
                 //继续选择
             }
@@ -128,29 +131,36 @@ $(document).ready(function(){
         $(this).toggle();//隐藏发牌按钮
         $("#btnHit").toggle();//显示发牌按钮
         $("#btnStick").toggle();//显示停止按钮
-        $("#btnRestart").toggle();
     })
 
     $("#btnHit").click(function(){
         hit();
-    })
+    })//发牌按钮用来发牌
+
+    function end(){
+        $("#btnHit").toggle();
+        $("#btnStick").toggle();
+        $("#btnRestart").toggle();
+    }
 
     $("#btnStick").click(function(){
-        $("#hdrResult").html('Stick');
-    })
+        $("#hdrResult").html('赢了').attr("class","win");
+        $("#imgResult").attr('src','images/check.png');
+        $("#result").toggle();
+        end();
+    })//结束按钮
 
     $("#btnRestart").click(function(){
         $("#result").toggle();
         $(this).toggle();
         $("#my_hand").empty();
         $("#hdrResult").html('');
+        $("#imgResult").attr('src','images/check.png');
+
         used_cards.length=0;
         hand.cards.length=0;
         hand.current_total=0;
-        
-        $("#btnDeal").toggle().trigger('click');
-    })
-    
-    
+        $("#btnDeal").toggle().trigger('click');//
+    })//重置按钮
     
 })
