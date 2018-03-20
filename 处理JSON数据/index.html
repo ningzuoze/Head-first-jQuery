@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>处理JSON</title>
+    <link rel="stylesheet" href="styles/my_style.css">
+</head>
+<body>
+    <header>
+        <h2>2018 比赛运动员</h2>
+    </header>
+    <div id="main">
+        <ul id="idTabs">
+            <li><a href="#male">男运动员</a></li>
+            <li><a href="#female">女运动员</a></li>
+            <li><a href="#all">全部运动员</a></li>
+            <li><a href="#new">添加新的运动员</a></li>
+        </ul>
+        <br>
+        <div id="male">
+            <h4>男运动员</h4>
+            <ul id="finishers_f"></ul>
+        </div>
+        <div id="female">
+            <h4>女运动员</h4>
+            <ul id="finishers_m"></ul>
+        </div>
+        <div id="all">
+            <h4>全部运动员</h4>
+            <ul id="finishers_all"></ul>
+        </div>
+        <div id="new">
+            <h4>添加新的运动员</h4>
+            <form if="addRunner" name="addRunner" action="service.php" method="POST">
+                姓氏：<input type="text" name="txtFirstName" id="txtFirstName"/><br>
+                名字：<input type="text" name="txtLastName" id="txtLastName"/><br>
+                性别：<select id="ddlGender" name="ddlGender">
+                    <option value="">请选择</option>
+                    <option value="f">女</option>
+                    <option value="m">男</option>
+                </select><br>
+                比赛记录：
+                <input type="text" name="txtMinutes" id="txtMinutes" size="10" maxlength="2" />(小时)
+                <input type="text" name="txtSeconds" id="txtSeconds" size="10" maxlength="2" />(分钟)
+                <br><br>
+                <button type="submit" name="btnSave" id="btnSave">添加运动员</button>
+                <input type="hidden" name="action" value="addRunner" id="action">
+            </form>
+        </div>
+    </div>
+    <footer>
+        <h4>祝贺所有运动员！</h4>
+        <button id="btnStart">开始更新</button>
+        <button id="btnStop">停止更新</button>
+        <br>
+        <br>最新日期：<br><div id="updateTime"></div>
+    </footer>
+    <br>
+    <span id="freq"></span>
+    <script src="scripts/jquery-1.6.2.min.js"></script>
+    <script src="scripts/my_scripts.js"></script>
+    <script src="scripts/jquery.idTabs.min.js"></script>
+</body>
+</html>
