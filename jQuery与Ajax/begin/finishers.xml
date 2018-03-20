@@ -7,14 +7,13 @@
 			<time>25:31</time><!--比赛时间-->
 			<pic> </pic>
         </runner>
-        <runner>
+		<runner>
 			<fname>Mary</fname>
 			<lname>Brown</lname>
 			<gender>f</gender>
 			<time>26:01 </time>
 			<pic> </pic>
         </runner>
-  
         <runner>
 			<fname>Frank</fname>
 			<lname>Jones</lname>

@@ -18,6 +18,34 @@ $(document).ready(function () {
     $("#main ul").idTabs("male");
     //jq插件（把ul元素转换为可点击的标签页）
 
+    //变量
+    var FREQ=1000;//创建等待的时间
+    var repeat=true;//设置开关
+
+    //设置开关 
+    function startAJAXcalls(){
+        if(repeat){
+            setTimeout(function(){
+                getXMLRacers();//ajax
+                startAJAXcalls();//调用自身
+            },FREQ)//定时调用函数
+        }//判断是否为true(刚开始为true)
+    } ;//每隔一秒进行一次调用函数
+    startAJAXcalls();
+
+    //开停按钮
+    $("#btnStop").click(function(){
+        repeat=false;//设为false后startAJAXcalls函数不再运行
+        $("#freq").html("停止更新");//更新提示文档提示
+    });
+    //停止按钮
+    $("#btnStart").click(function(){
+        repeat=true;//设为true后startAJAXcalls函数再次运行
+        startAJAXcalls();//运行自引用函数
+        showFrequency();//显示跟新频率
+    })
+    //开始按钮
+
     //循环处理finishers.xml文件
     function getXMLRacers() {
         $.ajax({
@@ -40,31 +68,18 @@ $(document).ready(function () {
                 })
             }
         })
-        function showFrequency(){
-            $("#freq").html("每隔"+FREQ/1000+"秒更新数据");
-        }//显示更新频率
-        showFrequency();
 
         function getTimeAjax(){
-            $('#updatedTime').load("time.php");
-        }//利用ajax快捷方式load加载time.php文件
-        getTimeAjax();
+            $('#updateTime').load("time.php");
+        }
+        getTimeAjax();//利用ajax快捷方式load加载time.php文件
     }
-
-    //自引用函数
-    var FREQ=10000;//创建等待的时间
-    var repeat=true;//设置开关
-    function startAJAXcalls(){
-        setTimeout(function(){
-            getXMLRacers();
-            startAJAXcalls();
-        },FREQ);
-    }
-
-    if(repeat){
-    startAJAXcalls();
-    }
-
     getXMLRacers();
+    //用ajax
     
+    function showFrequency(){
+        $("#freq").html("每隔"+FREQ/1000+"秒更新数据");
+    }
+    showFrequency();//显示更新频率
+
 })

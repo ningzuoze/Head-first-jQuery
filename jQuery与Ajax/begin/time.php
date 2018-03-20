@@ -1,4 +1,4 @@
-<php
-    date_default_timezone_get('America/Los_Angeles');
-    echo date("F j, Y, g:i:s a");
+<?php
+    date_default_timezone_set("PRC");
+    echo date("Y-m-d H:i:s");
 ?>
