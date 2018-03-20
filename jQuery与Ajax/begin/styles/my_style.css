@@ -2,6 +2,9 @@ body{
   background-color: #000;
   color: white;
 }
+ul li{
+  list-style: none;
+}
 /*开始构建标签代码*/
 
 #main{
