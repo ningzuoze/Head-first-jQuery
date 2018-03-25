@@ -1,19 +1,4 @@
-$(document).ready(function () {
-    function getTime() {
-        var a_p = "";
-        var d = new Date;
-        var curr_hour = d.getHours();
-        (curr_hour < 12) ? a_p = "AM" : a_p = "PM";
-        (curr_hour == 0) ? curr_hour = 12 : curr_hour = curr_hour;
-        (curr_hour > 12) ? curr_hour = curr_hour - 12 : curr_hour = curr_hour;
-        var curr_min = d.getMinutes().toString();
-        var curr_sec = d.getSeconds().toString();
-        if (curr_min.length == 1) { curr_min = "0" + curr_min };
-        if (curr_sec.length == 1) { curr_sec = "0" + curr_sec };
-        $('#updateTime').html(curr_hour + ":" + curr_min + ":" + curr_sec + " " + a_p);
-    }
-    //返回时间函数
-
+$(document).ready(function(){
     //jq插件（把ul元素转换为可点击的标签页）
     $("#main ul").idTabs("male");
     //jq插件（把ul元素转换为可点击的标签页）
@@ -26,7 +11,7 @@ $(document).ready(function () {
     function startAJAXcalls(){
         if(repeat){
             setTimeout(function(){
-                getXMLRacers();//ajax
+                getDBRacers();//ajax
                 startAJAXcalls();//调用自身
             },FREQ)//定时调用函数
         }//判断是否为true(刚开始为true)
@@ -46,40 +31,67 @@ $(document).ready(function () {
     })
     //开始按钮
 
-    //循环处理finishers.xml文件
-    function getXMLRacers() {
-        $.ajax({
-            url: "finishers.xml", //通过ajax加载fininshers.xml文件
-            cache: false, //本地缓存结果，减少对服务器的调用
-            dataType: "xml", //从服务器返回的数据类型
-            success: function (xml) {//用返回的数据完成任务
-                $("#finishers_m").empty(); //将原先的内容清空
-                $("#finishers_f").empty();
-                $("#finishers_all").empty();
-                $(xml).find("runner").each(function () {//用find找出runner并遍历
-                    var info = '<li>姓名：' + $(this).find("fname").text() + ' ' + $(this).find("lname").text() +"  "+ $(this).find("time").text() + '</li>';
-                    //找到runner文件中全部的的姓（fneme）和名(lname)还有比赛时间(time)
-                    if ($(this).find("gender").text() == "m") {
-                        $('#finishers_m').append(info); //判断性别将女运动员放到女列表中
-                    } else if ($(this).find("gender").text() == "f") {
-                        $('#finishers_f').append(info); //判断性别将男运动员放到男列表中
-                    } else { }
-                    $('#finishers_all').append(info); //将所有的运动员放到全部列表中
+
+
+
+    //循环处理service.php文件内容为json
+    function getDBRacers(){
+        $.getJSON("serivce.php?action=getRunners",function(json){//只能解析json文件的格式否则不能运行函数
+            if(json.runners.length>0){//判断json文件是否存在
+                $('#finishers_m').empty();//清空之前数据
+                $('#finishers_f').empty();
+                $('#finishers_all').empty();
+
+                $.each(json.runners,function(){//循环json文件（要循环的文件，循环执行的函数）
+                    var info ='<li>名字：'+this['fname']+'  '+this['lname']+' '+this['time']+'</li>';//用li储存
+                    if(this['gender']=='m'){//判断男女
+                       $('#finishers_m').append(info); //添加进去
+                    }else if(this['gender']=='f'){
+                        $('#finishers_f').append(info);
+                    }else{}
+                    $('#finishers_all').append(info);
                 })
             }
         })
+        getTimeAjax();//利用ajax快捷方式load加载time.php文件
+    }//用post方法
+    
+
+
+
 
         function getTimeAjax(){
             $('#updateTime').load("time.php");
-        }
-        getTimeAjax();//利用ajax快捷方式load加载time.php文件
-    }
-    getXMLRacers();
-    //用ajax
+        }    
     
     function showFrequency(){
         $("#freq").html("每隔"+FREQ/1000+"秒更新数据");
     }
     showFrequency();//显示更新频率
 
+
+//json
+    $("#btnSave").click(function(){
+        var data =$("#addRunner :input").serializeArray();
+        $.post("serivce.php?action=addRunner",data,function(json){//$.post(数据发送地址，发送的数据提前串行化，处理函数);
+            alert(json);
+            if(json.status=='fail'){//判断是否传输成功
+                alert(json.message)//弹出为啥错误
+            }else if(json.status=="success"){
+                alert(json.message);//弹出传输成功
+                clearInputs();//清空表单
+            }
+
+        },"json")
+    })
+    function clearInputs() {
+        $("#addRunner :input").each(function(){
+            $(this).val('');
+        })
+    }//清空表单内容
+
+    $("#addRunner").submit(function(){
+        return false;
+    })//取消表单中的提交动作
+    
 })
