@@ -19,13 +19,13 @@
             <hr>
             <h3>怪物类型：</h3>
         <div id="type_select">
-            <input type="radio" name="creture_type" id="radio1" class="just_display">
+            <input type="radio" name="creture_type" id="radio1" class="just_display" value="Cabrera">
                 <label for="radio1">卡布拉</label>
-            <input type="radio" name="creture_type" id="radio2">
+            <input type="radio" name="creture_type" id="radio2" class="just_display" value="TheJerseyDevil">
                 <label for="radio2">泽西恶魔</label>
-            <input type="radio" name="creture_type" id="radio3">
+            <input type="radio" name="creture_type" id="radio3" class="just_display" value="Thelakewatermonster">
                 <label for="radio3">尼斯湖水怪</label>
-            <input type="radio" name="creture_type" id="radio4">
+            <input type="radio" name="creture_type" id="radio4" class="just_display" value="bigfoot">
                 <label for="radio4">大脚怪</label>    
         </div>
         <h3>与怪物的距离(英尺)</h3>
@@ -62,14 +62,15 @@
         <div id="swatch" class="ui-widget-content ui-corner-all"></div>
         <br>
         <br>
-          红：<input type="text" name="creature_color" id="red_val" class="just_display readonly" readonly="readonly">
+          红：<input type="text" name="creature_red" id="red_val" class="just_display readonly" readonly="readonly">
         <div id="red"></div>
-        绿：<input type="text" name="creature_color" id="green_val" class="just_display readonly" readonly="readonly">
+        绿：<input type="text" name="creature_green" id="green_val" class="just_display readonly" readonly="readonly">
         <div id="green"></div>
-        蓝: <input type="text" name="creature_color" id="blue_val" class="just_display readonly" readonly="readonly">
+        蓝: <input type="text" name="creature_blue" id="blue_val" class="just_display readonly" readonly="readonly">
         <div id="blue"></div>
         <br>
-        <button type="submit">点我提交</button>
+        <button type="submit" id="btnSave">点我提交</button>
+        </form>
 </body>
 <script src="script/jquery-1.8.3.js"></script>
 <script src="script/jquery-ui-1.9.2.custom.js"></script>

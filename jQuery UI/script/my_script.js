@@ -72,4 +72,38 @@ $(document).ready(function(){
         change:refreshSwatch//改变时运行的函数
     })//添加颜色滑动
     $("button:submit").button();
+
+
+
+    //提交数据
+    $("#btnSave").click(function(){
+        var data =$("#monster :input").serializeArray();
+        console.log(data);
+        
+        $.post("serivce.php",data,function(json){//$.post(数据发送地址，发送的数据提前串行化，处理函数);
+            if(json.status=='fail'){//判断是否传输成功
+                alert(json.message)//弹出为啥错误
+            }else if(json.status=="success"){
+                alert(json.message);//弹出传输成功
+                clearInputs();//清空表单
+            }
+
+        },"json")
+    })
+    function clearInputs() {
+        $("#monster :input").each(function(){
+            $(this).val('');
+        })
+    }//清空表单内容
+
+    $("#monster").submit(function(){
+        return false;
+    })//取消表单中的提交动作
+
+
+    
 })
+
+
+
+

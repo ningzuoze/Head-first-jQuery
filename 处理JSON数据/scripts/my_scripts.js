@@ -73,6 +73,8 @@ $(document).ready(function(){
 //json
     $("#btnSave").click(function(){
         var data =$("#addRunner :input").serializeArray();
+        console.log(data);
+        
         $.post("serivce.php?action=addRunner",data,function(json){//$.post(数据发送地址，发送的数据提前串行化，处理函数);
             alert(json);
             if(json.status=='fail'){//判断是否传输成功
@@ -83,6 +85,7 @@ $(document).ready(function(){
             }
 
         },"json")
+        console.log(data);
     })
     function clearInputs() {
         $("#addRunner :input").each(function(){
